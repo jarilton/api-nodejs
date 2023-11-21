@@ -1,7 +1,23 @@
-import { test, expect } from 'vitest'
+import { test, beforeAll, afterAll } from 'vitest'
 
-test('O usuário consegue criar uma nova transação', () => {
-  const responsestatusCode = 201
+import request from 'supertest'
+import { app } from '../src/app'
 
-  expect(responsestatusCode).toBe(201)
+beforeAll(async () => {
+  await app.ready()
+})
+
+afterAll(async () => {
+  await app.close()
+})
+
+test('User can create a new transaction', async () => {
+  await request(app.server)
+    .post('/transactions')
+    .send({
+      title: 'New transaction',
+      value: 5000,
+      type: 'credit',
+    })
+    .expect(201)
 })
