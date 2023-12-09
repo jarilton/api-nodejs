@@ -8,9 +8,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "knex": "node --no-warnings ./node_modules/tsx/dist/esm/index.js ./node_modules/.bin/knex",
+    "knex": "ts-node ./node_modules/.bin/knex",
     "lint": "eslint src --ext .ts --fix",
-    "build": "ts-node --loader ts-node/esm ./node_modules/.bin/knex migrate:latest",
+    "build": "tsup src --out-dir dist",
     "test": "vitest"
   },
   "dependencies": {
@@ -29,6 +29,7 @@
     "eslint": "^8.52.0",
     "sqlite3": "^5.1.6",
     "supertest": "^6.3.3",
+    "ts-node": "^10.9.2",
     "tsup": "^8.0.1",
     "tsx": "^3.14.0",
     "vitest": "^0.34.6"
